@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot name="workcell">
+  <!-- connect model base to gazebo world -->
+  <link name="world" />
+
+  <joint name="simple_conveyor_joint" type="fixed">
+    <parent link="world" />
+    <child link="simple_conveyor_base" />
+    <origin xyz="0 0 0.5" rpy="0 0 0" />
+  </joint>
+
+  <link name="simple_conveyor_base">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="3 0.5 1" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="3 0.5 1" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <inertia ixx="0.5" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.5" />
+    </inertial>
+  </link>
+
+  <link name="simple_conveyor_top">
+    <!-- <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="3 0.5 0.001" />
+      </geometry>
+    </visual> -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="3 0.5 0.001" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <inertia ixx="0.5" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.5" />
+    </inertial>
+  </link>
+
+  <joint name="belt_joint" type="prismatic">
+    <origin xyz="0.0 0.0 0.501" rpy="0.0 0.0 0.0" />
+    <parent link="simple_conveyor_base" />
+    <child link="simple_conveyor_top" />
+    <axis xyz="1 0 0" />
+    <limit lower="0.0" upper="1" effort="1000" velocity="1000" />
+  </joint>
+
+  <gazebo>
+    <plugin name='test_gazebo_plugin' filename='libtest_gazebo_plugin.so'>
+      <robotNamespace>Test_gazebo</robotNamespace>
+      <power>0.6</power>
+      <joint>belt_joint</joint>
+      <link>simple_conveyor_top</link>
+      <max_velocity>1.0</max_velocity>
+    </plugin>
+  </gazebo>
+</robot>
