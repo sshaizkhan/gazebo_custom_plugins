@@ -1,4 +1,4 @@
-#include "mock_plugin/test_gazebo_plugin.hpp"
+#include "gazebo_custom_plugins/conveyor_belt_plugin.hpp"
 
 #include <gazebo/physics/physics.hh>
 #include <iostream>

@@ -58,7 +58,7 @@
   </joint>
 
   <gazebo>
-    <plugin name='test_gazebo_plugin' filename='libtest_gazebo_plugin.so'>
+    <plugin name='test_gazebo_plugin' filename='libconveyor_belt_plugin.so'>
       <robotNamespace>Test_gazebo</robotNamespace>
       <power>0.6</power>
       <joint>belt_joint</joint>

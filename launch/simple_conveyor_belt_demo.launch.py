@@ -7,10 +7,10 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     gazebo_ros_package_path = FindPackageShare('gazebo_ros').find('gazebo_ros')
-    mock_plugin_package_path = FindPackageShare('mock_plugin').find('mock_plugin')
+    gazebo_custom_plugins_package_path = FindPackageShare('gazebo_custom_plugins').find('gazebo_custom_plugins')
 
-    world_file_path = os.path.join(mock_plugin_package_path, 'worlds', 'test_gazebo.world')
-    urdf_file_path = os.path.join(mock_plugin_package_path, 'urdf', 'test_conveyor.urdf')
+    world_file_path = os.path.join(gazebo_custom_plugins_package_path, 'worlds', 'box_spawn.world')
+    urdf_file_path = os.path.join(gazebo_custom_plugins_package_path, 'urdf', 'simple_coveyor_belt.urdf')
 
     return LaunchDescription([
         IncludeLaunchDescription(
@@ -23,6 +23,6 @@ def generate_launch_description():
         Node(
             package='gazebo_ros',
             executable='spawn_entity.py',
-            arguments=['-entity', 'test_conveyor_plugin', '-file', urdf_file_path],
+            arguments=['-entity', 'coveyor_belt_demo', '-file', urdf_file_path],
             output='screen')
     ])
