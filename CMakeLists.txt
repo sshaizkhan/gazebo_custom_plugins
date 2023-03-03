@@ -76,11 +76,28 @@ ament_target_dependencies(conveyor_belt_plugin
 )
 ament_export_libraries(conveyor_belt_plugin)
 
+add_library(contact_plugin SHARED src/contact_plugin.cpp)
+
+target_include_directories(contact_plugin PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+
+ament_target_dependencies(contact_plugin
+  "gazebo_ros"
+  "gazebo_dev"
+  "rclcpp"
+  "sensor_msgs"
+  "std_srvs"
+  "std_msgs"
+)
+ament_export_libraries(contact_plugin)
+
 install(DIRECTORY include/
         DESTINATION include)
 
 install(TARGETS
   conveyor_belt_plugin
+  contact_plugin
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
